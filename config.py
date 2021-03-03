@@ -6,6 +6,8 @@ class Config:
 
     def __init__(self):
 
+        self.PORT = int(environ.get('PORT'))
+
         # MongoDB authentication
         self.DB_HOST = environ.get('DB_HOST')
         self.DB_PASSWORD = environ.get('DB_PASSWORD')

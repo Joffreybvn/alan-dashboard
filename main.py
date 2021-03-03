@@ -72,4 +72,4 @@ def update_settings(request: UserUpdate):
 
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", port=5151, reload=True, access_log=False)
+    uvicorn.run("main:app", port=config.PORT, reload=True, access_log=False)
