@@ -1,6 +1,6 @@
 
-const API_URL = "http://127.0.0.1:5151"
-// const API_URL = "https://alandashboard.joffreybvn.be"
+//const API_URL = "http://127.0.0.1:5151"
+const API_URL = "https://alandashboard.joffreybvn.be"
 
 let post = (url, body) => {
     return fetch(url, {method: "POST", body: JSON.stringify(body)});
