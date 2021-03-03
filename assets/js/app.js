@@ -3,6 +3,7 @@ import {retrieveToken} from './modules/url.js'
 import {requestSettings, sendSettings} from './modules/request.js'
 import {applySettings, disableSettings, getSettings} from './modules/form.js'
 
+const SITE_URL = "https://turingbot.ml/"
 let saveButton = document.getElementById('save')
 
 export function main() {
@@ -19,7 +20,7 @@ export function main() {
         applySettings(settings)
 
     }).catch((message) => {
-        document.location.href="./error.html"
+        document.location.href= SITE_URL + "error.html"
     })
 
     // Triggered when the user save
@@ -30,7 +31,7 @@ export function main() {
 
         // Send the new settings
         sendSettings(access_token, getSettings()).then(() => {
-            document.location.href="./confirm.html"
+            document.location.href= SITE_URL + "confirm.html"
         })
     })
 }
