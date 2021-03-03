@@ -48,8 +48,9 @@ let sendSettings = (access_token, settings) => {
                 resolve(true)
             })
 
-            .catch((reject) => {
-                reject(false)
+            .catch((error) => {
+                console.log(error)
+                reject(error)
             })
     })
 }
