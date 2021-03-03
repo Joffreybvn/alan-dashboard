@@ -54,7 +54,7 @@ class Database:
             if access_token and timeout_time:
 
                 # Check if the timeout time has not passed yet
-                if timeout_time < datetime.now():
+                if datetime.now() > timeout_time:
                     return False
 
                 # Remove the site token and token timeout
