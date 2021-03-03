@@ -23,7 +23,6 @@ app.add_middleware(
 )
 
 
-
 @app.get("/")
 def status():
     """Return the status message of the server."""
@@ -72,4 +71,4 @@ def update_settings(request: UserUpdate):
 
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", port=config.PORT, reload=True, access_log=False)
+    uvicorn.run("main:app", port=config.PORT, host="0.0.0.0", reload=True, access_log=False)
