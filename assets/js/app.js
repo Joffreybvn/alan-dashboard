@@ -24,6 +24,7 @@ export function main() {
         applySettings(settings)
 
     }).catch((message) => {
+        console.log(message)
         //document.location.href= SITE_URL + "error.html"
     })
 
