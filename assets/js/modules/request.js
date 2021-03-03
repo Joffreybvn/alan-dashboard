@@ -22,7 +22,7 @@ let requestSettings = (site_token) => {
 
                 // If the status is true, return the settings
                 if (json['status']) {
-                    resolve(json['access_token'], json['settings'])
+                    resolve([json['access_token'], json['settings']])
                 }
 
                 // If not, raise the error message

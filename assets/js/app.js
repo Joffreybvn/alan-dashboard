@@ -13,7 +13,11 @@ export function main() {
     let access_token;
 
     // Use it to retrieve the user settings
-    requestSettings(site_token).then((token, settings) => {
+    requestSettings(site_token).then((result) => {
+
+        // Get the token and settings
+        let token, settings
+        [token, settings] = result
 
         // Save the access token and display the settings
         access_token = token
