@@ -24,7 +24,7 @@ export function main() {
         applySettings(settings)
 
     }).catch((message) => {
-        document.location.href= SITE_URL + "error.html"
+        //document.location.href= SITE_URL + "error.html"
     })
 
     // Triggered when the user save
