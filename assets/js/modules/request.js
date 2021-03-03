@@ -1,5 +1,5 @@
 
-const API_URL = "https://api.turingbot.ml"
+const API_URL = "http://127.0.0.1:5151"
 
 let post = (url, body) => {
     return fetch(url, {method: "POST", body: JSON.stringify(body)});
@@ -16,15 +16,42 @@ let requestSettings = (site_token) => {
     return new Promise((resolve, reject) => {
         post(API_URL + "/site/", body)
 
-            // Return a response if received
-            .then(response => {
-                resolve(response)
+            // Check if a response is received
+            .then(async response => {
+                let json = await response.json()
 
-            // Raise an error if triggered
-            }).catch(error => {
-                reject(error)
-        });
+                // If the status is true, return the settings
+                if (json['status']) {
+                    resolve(json['access_token'], json['settings'])
+                }
+
+                // If not, raise the error message
+                else {
+                    reject(json['message'])
+                }
+            }).catch(() => reject(false))
     })
 }
 
-export {requestSettings}
+let sendSettings = (access_token, settings) => {
+
+    // Create the request body
+    let body = settings
+    body['access_token'] = access_token
+
+    // Send the request
+    return new Promise((resolve, reject) => {
+        post(API_URL + "/settings/", body)
+
+            // Check if response is received
+            .then(async response => {
+                resolve(true)
+            })
+
+            .catch((reject) => {
+                reject(false)
+            })
+    })
+}
+
+export {requestSettings, sendSettings}
