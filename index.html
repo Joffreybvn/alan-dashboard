@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Alan Turing - Dashboard</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+
+    <!-- Bulma Version 0.9.1-->
+    <link rel="stylesheet" type="text/css" href="./assets/css/bulma.css" />
+    <link rel="stylesheet" type="text/css" href="./assets/css/bulma-switch.min.css">
+    <link rel="stylesheet" type="text/css" href="./assets/css/styles.css">
+</head>
+
+<body>
+
+    <!-- Header navigation -->
+    <nav class="navbar is-white">
+        <div class="container">
+            <div class="navbar-brand">
+                <a class="navbar-item brand-text" href="./">Alan Turing Dashboard</a>
+                <div class="navbar-burger burger" data-target="navMenu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            <div id="navMenu" class="navbar-menu">
+                <div class="navbar-start">
+                    <a class="navbar-item" href="./">Home</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="columns">
+            <div class="column is-12">
+                <section class="column is-12">
+                    <nav class="breadcrumb" aria-label="breadcrumbs">
+                        <ul>
+                            <li><a href="./">General</a></li>
+                            <li class="is-active"><a href="#" aria-current="page">Dashboard</a></li>
+                        </ul>
+                    </nav>
+
+                    <section class="hero is-info welcome is-small">
+                        <div class="hero-body">
+                            <div class="container">
+                                <h1 class="title">
+                                    Hello, USER
+                                </h1>
+                                <h2 class="subtitle">
+                                    I hope you are having a great day!
+                                </h2>
+                            </div>
+                        </div>
+                    </section>
+                </section>
+                <section class="column is-12">
+                    <div class="card">
+                        <header class="card-header">
+                            <p class="card-header-title">
+                                Settings
+                            </p>
+                        </header>
+                        <div class="card-content">
+                            <div class="content">
+
+                                <!-- Field: BeCode token -->
+                                <div class="field is-horizontal">
+                                    <div class="field-label vertical-centered">
+                                        <label class="subtitle is-5">BeCode token</label>
+                                    </div>
+                                    <div class="field-body">
+                                    <div class="field">
+                                        <p class="control">
+                                            <input class="input" type="text" placeholder="Your becode token">
+                                        </p>
+                                    </div>
+                                    </div>
+                                </div>
+
+                                <!-- Field: Receive attendance notification -->
+                                <div class="field is-horizontal">
+                                    <div class="field-label vertical-centered">
+                                        <label class="subtitle is-5">Attendance alerts</label>
+                                    </div>
+                                    <div class="field-body">
+
+                                            <div class="field">
+                                                <input id="switchMedium" type="checkbox" name="switchMedium" class="switch is-medium">
+                                                <label for="switchMedium"></label>
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="button is-large is-fullwidth is-info">Save</button>
+                </section>
+            </div>
+        </div>
+    </div>
+    <script async type="text/javascript" src="./assets/js/bulma.js"></script>
+</body>
+
+</html>
