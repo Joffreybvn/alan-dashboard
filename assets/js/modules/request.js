@@ -20,6 +20,7 @@ let requestSettings = (site_token) => {
             // Check if a response is received
             .then(async response => {
                 let json = await response.json()
+                console.log(json)
 
                 // If the status is true, return the settings
                 if (json['status']) {
