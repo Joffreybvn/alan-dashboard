@@ -14,7 +14,7 @@ let requestSettings = (site_token) => {
 
     // Send the request
     return new Promise((resolve, reject) => {
-        post(API_URL + "/access/", body)
+        post(API_URL + "/site/", body)
 
             // Return a response if received
             .then(response => {
