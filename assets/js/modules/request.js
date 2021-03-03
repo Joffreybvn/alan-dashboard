@@ -30,7 +30,7 @@ let requestSettings = (site_token) => {
                 else {
                     reject(json['message'])
                 }
-            }).catch(() => reject(false))
+            }).catch((error) => reject(error))
     })
 }
 
