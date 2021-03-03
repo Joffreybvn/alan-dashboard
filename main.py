@@ -1,6 +1,7 @@
 
 import uvicorn
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 from config import config
@@ -8,6 +9,19 @@ from src.database import Database
 
 database = Database(config.DB_HOST, config.DB_PASSWORD)
 app = FastAPI()
+
+origins = [
+    "http://turingbot.ml",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 
 @app.get("/")
