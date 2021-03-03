@@ -63,7 +63,14 @@ class UserUpdate(BaseModel):
 
 @app.post("/settings/")
 def update_settings(request: UserUpdate):
-    print(request)
+
+    database.upsert_user(
+        request.access_token,
+        becode_token=request.becode_token,
+        send_notification=request.send_notification
+    )
+
+    return {"status": True}
 
 
 if __name__ == "__main__":

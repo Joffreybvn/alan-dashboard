@@ -50,11 +50,10 @@ class Database:
             # Check if the user has a token and a token timeout
             access_token = document.get("access_token", None)
             timeout_time = document.get("site_token_timeout", None)
-
             if access_token and timeout_time:
 
                 # Check if the timeout time has not passed yet
-                if datetime.now() > timeout_time:
+                if timeout_time > datetime.now():
                     return False
 
                 # Remove the site token and token timeout
@@ -68,19 +67,34 @@ class Database:
         return False
 
     @staticmethod
-    def upsert_user(user_id: str, **kwargs):
+    def upsert_user(access_token: str, **kwargs):
         """
         Update or Insert a user to the database.
 
-        :param user_id: The user to add to the database.
+        :param access_token: The access token of the user
         :param kwargs:
             - send_notification (bool)
             - becode_token (str)
         """
 
         # Create a User object with the given arguments
-        kwargs['_id'] = user_id
-        user = User(**kwargs)
+        user = User.one(Q.access_token == access_token, projection={
+            "access_token_timeout": True,
+        })
 
-        # Upsert it to the database
-        user.upsert()
+        if user:
+            document = user.__dict__['_document']
+
+            # Check the token timeout
+            access_token_timeout = document.get("access_token_timeout", False)
+
+            if access_token_timeout:
+
+                # Check if the timeout time has not passed yet
+                if access_token_timeout.date() < datetime.now().date():
+                    return False
+
+                # Upsert the user
+                kwargs['_id'] = user._id
+                updated_user = User(**kwargs)
+                updated_user.upsert()
