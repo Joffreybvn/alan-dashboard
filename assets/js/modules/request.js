@@ -15,7 +15,7 @@ let requestSettings = (site_token) => {
 
     // Send the request
     return new Promise((resolve, reject) => {
-        post(API_URL + "/site/", body)
+        post(API_URL + "/settings/login/", body)
 
             // Check if a response is received
             .then(async response => {
@@ -43,7 +43,7 @@ let sendSettings = (access_token, settings) => {
 
     // Send the request
     return new Promise((resolve, reject) => {
-        post(API_URL + "/settings/", body)
+        post(API_URL + "/settings/update/", body)
 
             // Check if response is received
             .then(async response => {
