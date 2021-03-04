@@ -1,76 +1,10 @@
 
 import uvicorn
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
-
 from config import config
-from src.database import Database
+from src import Dashboard
 
-database = Database(config.DB_HOST, config.DB_PASSWORD)
-app = FastAPI()
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=['*'],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-
-@app.get("/")
-def status():
-    """Return the status message of the server."""
-
-    return {
-        "status": True,
-        "message": "The server is up and running"
-    }
-
-
-class Site(BaseModel):
-    token: str
-
-
-@app.post("/site/")
-def access_dashboard(request: Site):
-
-    # Return the access token if found
-    if result := database.get_account_settings(request.token):
-
-        return {
-            "status": True,
-            "access_token": result[0],
-            "settings": {
-                "becode_token": result[1],
-                "send_notification": result[2]
-            }
-        }
-
-    # Otherwise, return an error message
-    return {
-        "status": False,
-        "message": "Your URL has timed-oud. Ask Alan another link with !settings"
-    }
-
-
-class UserUpdate(BaseModel):
-    access_token: str
-    becode_token: str
-    send_notification: bool
-
-
-@app.post("/settings/")
-def update_settings(request: UserUpdate):
-
-    database.upsert_user(
-        request.access_token,
-        becode_token=request.becode_token,
-        send_notification=request.send_notification
-    )
-
-    return {"status": True}
+# Create the Dashboard backend object
+app = Dashboard().get_app()
 
 
 if __name__ == "__main__":

@@ -1,6 +1,6 @@
 
 from datetime import datetime
-from typing import List, Union
+from typing import Union
 
 from pymongo import MongoClient
 from mongoframes.queries import Q
@@ -60,7 +60,7 @@ class Database:
                 self.remove_site_token(user._id)
 
                 # Return the acces token and settings
-                becode_token = document.get("becode_token", None)
+                becode_token = document.get("becode_token", "")
                 send_notification = document.get("send_notification", False)
                 return access_token, becode_token, send_notification
 
@@ -86,9 +86,7 @@ class Database:
             document = user.__dict__['_document']
 
             # Check the token timeout
-            access_token_timeout = document.get("access_token_timeout", False)
-
-            if access_token_timeout:
+            if access_token_timeout := document.get("access_token_timeout", False):
 
                 # Check if the timeout time has not passed yet
                 if access_token_timeout.date() < datetime.now().date():
